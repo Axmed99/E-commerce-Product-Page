@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics - ShopCart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ShopCart</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="electronics.html">Electronics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fashion.html">Fashion</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="search-box me-3">
+                        <input type="search" class="form-control search-input" placeholder="Search products...">
+                    </div>
+                    <button class="btn btn-outline-primary me-2" onclick="showWishlist()">
+                        <i class="far fa-heart"></i>
+                        <span class="wishlist-count">0</span>
+                    </button>
+                    <button class="btn btn-outline-primary me-2" onclick="showCompare()">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span class="compare-count">0</span>
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Electronics Header -->
+    <header class="electronics-header text-center text-white">
+        <div class="container">
+            <h1>Electronics Store</h1>
+            <p class="lead">Discover the latest technology and gadgets</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Filters -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Filters</h5>
+                        <hr>
+                        <!-- Price Range -->
+                        <div class="mb-3">
+                            <label class="form-label">Price Range</label>
+                            <input type="range" class="form-range filter-input" name="priceRange" min="0" max="2000">
+                            <div class="d-flex justify-content-between">
+                                <span>$0</span>
+                                <span>$2000</span>
+                            </div>
+                        </div>
+                        <!-- Categories -->
+                        <div class="mb-3">
+                            <label class="form-label">Categories</label>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="category" value="phones">
+                                <label class="form-check-label">Phones & Tablets</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="category" value="computers">
+                                <label class="form-check-label">Computers & Laptops</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="category" value="audio">
+                                <label class="form-check-label">Audio & Headphones</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="category" value="gaming">
+                                <label class="form-check-label">Gaming</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="category" value="accessories">
+                                <label class="form-check-label">Accessories</label>
+                            </div>
+                        </div>
+                        <!-- Brands -->
+                        <div class="mb-3">
+                            <label class="form-label">Brands</label>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="brand" value="apple">
+                                <label class="form-check-label">Apple</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="brand" value="samsung">
+                                <label class="form-check-label">Samsung</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input filter-input" type="checkbox" name="brand" value="sony">
+                                <label class="form-check-label">Sony</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Sort and Results -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <p class="mb-0 showing-results">Showing all products</p>
+                    <select class="form-select w-auto">
+                        <option>Sort by: Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Customer Rating</option>
+                    </select>
+                </div>
+                <!-- Products Grid -->
+                <div class="row" id="products-grid">
+                    <!-- Products will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items">
+                        <!-- Cart items will be dynamically added here -->
+                    </div>
+                    <div class="text-end mt-3">
+                        <h5>Total: $<span id="cart-total">0.00</span></h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary" onclick="clearCart()">Clear Cart</button>
+                    <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
